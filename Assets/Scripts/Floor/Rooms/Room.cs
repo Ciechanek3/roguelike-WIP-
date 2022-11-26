@@ -15,7 +15,6 @@ namespace Floor.Rooms
 
         public void SetupRoom(Coordinates coordinates, int roomNumber)
         {
-            Debug.Log(coordinates.X + " " + coordinates.Y);
             gameObject.transform.position = new Vector3(coordinates.X * GameSettings.Instance.XRoomSize, 0, coordinates.Y * GameSettings.Instance.YRoomSize);
 
 
