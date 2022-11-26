@@ -13,13 +13,10 @@ namespace Floor
         [SerializeField] private RoomPicker _roomPicker;
          
         [SerializeField] private int numberOfRooms;
-        [SerializeField] private int xGrid;
-        [SerializeField] private int yGrid;
 
         private int _currentX;
         private int _currentY;
         private List<Coordinates> _takenCoordinates = new List<Coordinates>();
-        private List<Room> _rooms = new List<Room>();
 
         #endregion
         #region SetupData
@@ -27,11 +24,6 @@ namespace Floor
         private void Start()
         {
             CreateFloorCoordinates();
-            for (int i = 0; i < _takenCoordinates.Count; i++)
-            {
-                Debug.LogError(_takenCoordinates[i].X + " " + _takenCoordinates[i].Y);
-            }
-            Debug.Log("coordinates count: " + _takenCoordinates.Count);
             CreateFloor();
         }
         #endregion
