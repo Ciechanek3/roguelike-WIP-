@@ -123,6 +123,51 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &10929750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 10929752}
+  - component: {fileID: 10929751}
+  m_Layer: 0
+  m_Name: GameSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &10929751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10929750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3658d520dad08ad4ab21f18e5909abd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xRoomSize: 50
+  yRoomSize: 50
+--- !u!4 &10929752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10929750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.483556, y: -0.07672842, z: 7.2523875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 835718604}
   - component: {fileID: 835718603}
+  - component: {fileID: 835718605}
   m_Layer: 0
   m_Name: FloorGenerator
   m_TagString: Untagged
@@ -245,9 +291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c680ab4dcd0c24889b03a932a3a00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingRoom: {fileID: 0}
-  availableRooms: []
-  numberOfRooms: 5
+  _roomPicker: {fileID: 835718605}
+  numberOfRooms: 20
   xGrid: 2
   yGrid: 2
 --- !u!4 &835718604
@@ -264,6 +309,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &835718605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835718602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b35441c2956e74d9dbbc29c429e6c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingRoom: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+  availableRooms:
+  - {fileID: 8530164695471899455, guid: a024da3aaa95ba74d80fc3363fe81838, type: 3}
+  - {fileID: 1037047235359253898, guid: 0f7a978e8a0d60b4883eb1779aa6853e, type: 3}
+  - {fileID: 2568956926525252600, guid: cbe412486a75365419a950d7a9969d7a, type: 3}
+  - {fileID: 8054171780460295227, guid: 9f20da0d7c402d5488c94a2cd589fb77, type: 3}
+  - {fileID: 5456870806426172586, guid: 7c9151a3df6b5734b883c80689390457, type: 3}
+  - {fileID: 5551997021444888734, guid: 0e7ec4246052e0a43bbce4717b47558d, type: 3}
+  - {fileID: 1743671702473285950, guid: d7aa400972f264849ada30b5620000a6, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

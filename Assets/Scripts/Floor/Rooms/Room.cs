@@ -1,36 +1,40 @@
-using System;
 using System.Collections.Generic;
+using Settings;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-public class Room : MonoBehaviour
+namespace Floor.Rooms
 {
-    [SerializeField] private Door topDoor;
-    [SerializeField] private Door downDoor;
-    [SerializeField] private Door rightDoor;
-    [SerializeField] private Door leftDoor;
-
-    private List<Door> _doors;
-
-
-    public List<Door> Doors => _doors;
-    private void Awake()
+    public class Room : MonoBehaviour
     {
-        _doors.Add(topDoor);
-        _doors.Add(downDoor);
-        _doors.Add(rightDoor);
-        _doors.Add(leftDoor);
-    }
+        [SerializeField] private List<Door> _doors;
+
+        public int x;
+        public int y;
+
+        public int index;
+
+        public void SetupRoom(Coordinates coordinates, int roomNumber)
+        {
+            Debug.Log(coordinates.X + " " + coordinates.Y);
+            gameObject.transform.position = new Vector3(coordinates.X * GameSettings.Instance.XRoomSize, 0, coordinates.Y * GameSettings.Instance.YRoomSize);
+
+
+            x = coordinates.X;
+            y = coordinates.Y;
+            index = roomNumber;
+        }
     
-    public Coordinates _coordinates;
-    
-    public void SetupRoom(int x, int y)
-    {
-        _coordinates = new Coordinates(x, y);
-    }
-    
-    public List<Door> EnableDoors(int amount)
-    {
-       return new List<Door>();
+        public bool CheckIfDoorExist(DoorType doorType)
+        {
+            for (int i = 0; i < _doors.Count; i++)
+            {
+                if (_doors[i].DoorType == doorType)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

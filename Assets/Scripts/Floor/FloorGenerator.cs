@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Floor.Rooms;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -15,53 +16,39 @@ namespace Floor
         [SerializeField] private int xGrid;
         [SerializeField] private int yGrid;
 
-        
-        private int _roomNumberLeft;
-
         private int _currentX;
         private int _currentY;
-        private List<Coordinates> _takenCoordinates;
-        private List<Room> _rooms;
+        private List<Coordinates> _takenCoordinates = new List<Coordinates>();
+        private List<Room> _rooms = new List<Room>();
 
         #endregion
         #region SetupData
-    
-        private void Awake()
-        {
-            _roomNumberLeft = numberOfRooms;
-            CreateFloorCoordinates();
-        }
-
+        
         private void Start()
         {
+            CreateFloorCoordinates();
+            for (int i = 0; i < _takenCoordinates.Count; i++)
+            {
+                Debug.LogError(_takenCoordinates[i].X + " " + _takenCoordinates[i].Y);
+            }
+            Debug.Log("coordinates count: " + _takenCoordinates.Count);
             CreateFloor();
         }
         #endregion
 
         public void CreateFloor()
         {
-            int randomNumber = Random.Range(1, 5);
-            _roomPicker.SetupStartingRoom(randomNumber);
-            _roomNumberLeft--;
+            Room room = Instantiate(_roomPicker.StartingRoom);
+            room.SetupRoom(_takenCoordinates[0], 0);
 
-
-            for (int i = 0; i < _takenCoordinates.Count; i++)
+            for (int i = 1; i < _takenCoordinates.Count; i++)
             {
-                _roomPicker.SetupRoom();
+                room = Instantiate(_roomPicker.GetProperRoomRandomly(
+                    _takenCoordinates[i - 1], 
+                    _takenCoordinates[i], 
+                    i + 1 < _takenCoordinates.Count ? _takenCoordinates[i + 1] : null));
+                room.SetupRoom(_takenCoordinates[i], i);
             }
-            /*List<Door> openedDoors = _roomPicker.SetupStartingRoom(randomNumber);
-            _roomNumberLeft -= randomNumber;
-
-            for (int i = 0; i < openedDoors.Count; i++)
-            {
-                if (_roomNumberLeft == 0)
-                {
-                    return;
-                }
-                Room randomRoom = _roomPicker.GetRandomElementFromOppositeDoor(openedDoors[i].DoorType);
-                Instantiate(randomRoom);
-                _roomNumberLeft--;
-            }*/
         }
 
         private void CreateFloorCoordinates()
@@ -83,7 +70,7 @@ namespace Floor
                 }
                 else if (x == 2)
                 {
-                    int y = Random.Range(0, 2);
+                    int y = Random.Range(0, 3);
                     
                     if (y == 0)
                     {
@@ -96,8 +83,8 @@ namespace Floor
                 }
 
                 Coordinates coordinates = new Coordinates(_currentX, _currentY);
-                
-                if (_takenCoordinates.Contains(coordinates))
+
+                if (_takenCoordinates.Any(c => c.X == _currentX && c.Y == _currentY))
                 {
                     i--;
                     continue;
