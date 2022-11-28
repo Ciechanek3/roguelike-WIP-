@@ -8,19 +8,11 @@ namespace Floor.Rooms
     {
         [SerializeField] private List<Door> _doors;
 
-        public int x;
-        public int y;
-
-        public int index;
-
         public void SetupRoom(Coordinates coordinates, int roomNumber)
         {
-            gameObject.transform.position = new Vector3(coordinates.X * GameSettings.Instance.XRoomSize, 0, coordinates.Y * GameSettings.Instance.YRoomSize);
-
-
-            x = coordinates.X;
-            y = coordinates.Y;
-            index = roomNumber;
+            gameObject.transform.position = new Vector3(coordinates.X * GameSettings.Instance.XRoomSize, 
+                                                        0, 
+                                                        coordinates.Y * GameSettings.Instance.YRoomSize);
         }
     
         public bool CheckIfDoorExist(DoorType doorType)

@@ -13,6 +13,7 @@ namespace Floor
         [SerializeField] private RoomPicker _roomPicker;
          
         [SerializeField] private int numberOfRooms;
+        [SerializeField] private List<SpecialRoom> specialRooms;
 
         private int _currentX;
         private int _currentY;
@@ -23,13 +24,13 @@ namespace Floor
         
         private void Start()
         {
-            CreateFloorCoordinates();
             CreateFloor();
         }
         #endregion
 
         public void CreateFloor()
         {
+            CreateFloorCoordinates();
             Room room = Instantiate(_roomPicker.StartingRoom);
             room.SetupRoom(_takenCoordinates[0], 0);
 
