@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LRTRoom1
       objectReference: {fileID: 0}
+    - target: {fileID: 332592646168417167, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 507895105525474538, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -122,6 +126,14 @@ PrefabInstance:
     - target: {fileID: 3873620496694135678, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3989443971860862384, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3989443971860862384, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 4015653237513931848, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
       propertyPath: m_Mesh
