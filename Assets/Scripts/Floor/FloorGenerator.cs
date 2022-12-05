@@ -10,14 +10,14 @@ namespace Floor
     {
         #region Variables
 
-        [SerializeField] private RoomPicker _roomPicker;
+        [SerializeField] private RoomPicker roomPicker;
          
         [SerializeField] private int numberOfRooms;
         [SerializeField] private List<SpecialRoom> specialRooms;
 
         private int _currentX;
         private int _currentY;
-        private List<Coordinates> _takenCoordinates = new List<Coordinates>();
+        private readonly List<Coordinates> _takenCoordinates = new List<Coordinates>();
 
         #endregion
         #region SetupData
@@ -28,20 +28,22 @@ namespace Floor
         }
         #endregion
 
-        public void CreateFloor()
+        private void CreateFloor()
         {
             CreateFloorCoordinates();
-            Room room = Instantiate(_roomPicker.StartingRoom);
-            room.SetupRoom(_takenCoordinates[0], 0);
+            Room startingRoom = Instantiate(roomPicker.StartingRoom);
+            Room room;
 
             for (int i = 1; i < _takenCoordinates.Count; i++)
             {
-                room = Instantiate(_roomPicker.GetProperRoomRandomly(
+                room = roomPicker.GetProperRoomRandomly(
                     _takenCoordinates[i - 1], 
                     _takenCoordinates[i], 
-                    i + 1 < _takenCoordinates.Count ? _takenCoordinates[i + 1] : null));
-                room.SetupRoom(_takenCoordinates[i], i);
+                    i + 1 < _takenCoordinates.Count ? _takenCoordinates[i + 1] : null);
+                room.PlaceOnScene(_takenCoordinates, i);
             }
+            
+            startingRoom.PlaceOnScene(_takenCoordinates, 0);
         }
 
         private void CreateFloorCoordinates()

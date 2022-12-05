@@ -1,31 +1,72 @@
 using System.Collections.Generic;
+using System.Linq;
+using ObjectPooling;
 using Settings;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Floor.Rooms
 {
-    public class Room : MonoBehaviour
+    public class Room : MonoBehaviour, IPool
     {
-        [SerializeField] private List<Door> _doors;
-
-        public void SetupRoom(Coordinates coordinates, int roomNumber)
+        [SerializeField] private List<Door> doors;
+        
+        public void Setup()
         {
-            gameObject.transform.position = new Vector3(coordinates.X * GameSettings.Instance.XRoomSize, 
-                                                        0, 
-                                                        coordinates.Y * GameSettings.Instance.YRoomSize);
+            gameObject.SetActive(true);
         }
-    
-        public bool CheckIfDoorExist(DoorType doorType)
+        
+        public void PlaceOnScene(List<Coordinates> coordinatesList, int coordinatesIndex)
         {
-            for (int i = 0; i < _doors.Count; i++)
+            gameObject.transform.position = new Vector3(
+                coordinatesList[coordinatesIndex].X * GameSettings.Instance.XRoomSize, 
+                0, 
+                coordinatesList[coordinatesIndex].Y * GameSettings.Instance.YRoomSize);
+            
+            SetupDoors(coordinatesList, coordinatesIndex);
+        }
+
+        private void SetupDoors(List<Coordinates> coordinatesList, int coordinatesIndex)
+        {
+            int x = coordinatesList[coordinatesIndex].X;
+            int y = coordinatesList[coordinatesIndex].Y;
+            for (int i = 0; i < doors.Count && i != coordinatesIndex; i++)
             {
-                if (_doors[i].DoorType == doorType)
+                if (coordinatesList[i].X != x && coordinatesList[i].Y != y)
                 {
-                    return true;
+                    continue;
+                }
+                if (coordinatesList[i].X - x == 1)
+                {
+                    SetupDoor(DoorType.Top);
+                }
+                else if (coordinatesList[i].X - x == -1)
+                {
+                    SetupDoor(DoorType.Down);
+                }
+                else if (coordinatesList[i].Y - y == 1)
+                {
+                    SetupDoor(DoorType.Left);
+                }
+                else if (coordinatesList[i].Y - y == -1)
+                {
+                    SetupDoor(DoorType.Right);
                 }
             }
+        }
+        
+        private void SetupDoor(DoorType doorType)
+        {
+            Door door = doors.FirstOrDefault(d => d.DoorType == doorType);
+            if (door != null)
+            {
+                door.Disable();
+            }
+        }
 
-            return false;
+        public bool CheckIfDoorExist(DoorType doorType)
+        {
+            return doors.Any(t => t.DoorType == doorType);
         }
     }
 }

@@ -352,8 +352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c680ab4dcd0c24889b03a932a3a00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomPicker: {fileID: 835718605}
-  numberOfRooms: 20
+  roomPicker: {fileID: 835718605}
+  numberOfRooms: 7
+  specialRooms: []
 --- !u!4 &835718604
 Transform:
   m_ObjectHideFlags: 0
@@ -389,6 +390,7 @@ MonoBehaviour:
   - {fileID: 5456870806426172586, guid: 7c9151a3df6b5734b883c80689390457, type: 3}
   - {fileID: 5551997021444888734, guid: 0e7ec4246052e0a43bbce4717b47558d, type: 3}
   - {fileID: 1743671702473285950, guid: d7aa400972f264849ada30b5620000a6, type: 3}
+  poolingMultiplier: 1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
