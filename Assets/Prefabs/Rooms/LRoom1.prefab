@@ -36,9 +36,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+      propertyPath: doors.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
       propertyPath: _doors.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+      propertyPath: doors.Array.data[0]
+      value: 
+      objectReference: {fileID: 2570459754203337267}
     - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
       propertyPath: _doors.Array.data[0]
       value: 

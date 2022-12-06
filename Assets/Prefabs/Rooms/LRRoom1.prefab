@@ -44,9 +44,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+      propertyPath: doors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
       propertyPath: _doors.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+      propertyPath: doors.Array.data[0]
+      value: 
+      objectReference: {fileID: 2673466307571004935}
+    - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+      propertyPath: doors.Array.data[1]
+      value: 
+      objectReference: {fileID: 3968263684394251575}
+    - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+      propertyPath: doors.Array.data[2]
+      value: 
+      objectReference: {fileID: 8766981617918039910}
     - target: {fileID: 1357561249375330763, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
       propertyPath: _doors.Array.data[0]
       value: 
@@ -231,6 +247,17 @@ MonoBehaviour:
 --- !u!114 &3968263684394251575 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7550772858583190626, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
+  m_PrefabInstance: {fileID: 6907291627025725781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3db931ba95e79d43b850877aeb006d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8766981617918039910 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2770050730017926707, guid: 797b985db7e8aed45bcc07e9a2e19c9f, type: 3}
   m_PrefabInstance: {fileID: 6907291627025725781}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

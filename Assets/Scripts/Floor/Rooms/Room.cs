@@ -10,6 +10,8 @@ namespace Floor.Rooms
     public class Room : MonoBehaviour, IPool
     {
         [SerializeField] private List<Door> doors;
+
+        public int index, x, y;
         
         public void Setup()
         {
@@ -24,13 +26,17 @@ namespace Floor.Rooms
                 coordinatesList[coordinatesIndex].Y * GameSettings.Instance.YRoomSize);
             
             SetupDoors(coordinatesList, coordinatesIndex);
+            
+            index = coordinatesIndex;
+            x = coordinatesList[coordinatesIndex].X;
+            y = coordinatesList[coordinatesIndex].Y;
         }
 
         private void SetupDoors(List<Coordinates> coordinatesList, int coordinatesIndex)
         {
             int x = coordinatesList[coordinatesIndex].X;
             int y = coordinatesList[coordinatesIndex].Y;
-            for (int i = 0; i < doors.Count && i != coordinatesIndex; i++)
+            for (int i = 0; i < coordinatesList.Count; i++)
             {
                 if (coordinatesList[i].X != x && coordinatesList[i].Y != y)
                 {
@@ -38,19 +44,19 @@ namespace Floor.Rooms
                 }
                 if (coordinatesList[i].X - x == 1)
                 {
-                    SetupDoor(DoorType.Top);
+                    SetupDoor(DoorType.Right);
                 }
                 else if (coordinatesList[i].X - x == -1)
                 {
-                    SetupDoor(DoorType.Down);
+                    SetupDoor(DoorType.Left);
                 }
                 else if (coordinatesList[i].Y - y == 1)
                 {
-                    SetupDoor(DoorType.Left);
+                    SetupDoor(DoorType.Top);
                 }
                 else if (coordinatesList[i].Y - y == -1)
                 {
-                    SetupDoor(DoorType.Right);
+                    SetupDoor(DoorType.Down);
                 }
             }
         }
