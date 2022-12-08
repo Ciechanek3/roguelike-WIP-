@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace ObjectPooling
 {
     public class ObjectPool<T> where T : MonoBehaviour, IPool
     {
-        public List<T> ObjectsInPool { get; }
+        public List<T> ObjectsInPool { get; private set; }
 
         private readonly List<T> _initialItems;
 
@@ -30,13 +33,33 @@ namespace ObjectPooling
             }
         }
 
-        public T TakeElementFromPool(T element)
+        public T TakeElementFromPool([CanBeNull] Func<List<T>> filter)
         {
+            T element;
+            if (filter != null)
+            {
+                List<T> elements = filter.Invoke();
+                if (elements.Count == 0)
+                {
+                    MakePool(1);
+                    element = TakeElementFromPool(filter);
+                }
+                else
+                {
+                    element = elements[Random.Range(0, elements.Count)];
+                }
+            }
+            else
+            {
+                element = ObjectsInPool[Random.Range(0, ObjectsInPool.Count)];
+            }
+            
             if (ObjectsInPool.Contains(element))
             {
                 ObjectsInPool.Remove(element); 
             }
-            element.Setup();
+
+            element.gameObject.SetActive(true);
             return element;
         }
 

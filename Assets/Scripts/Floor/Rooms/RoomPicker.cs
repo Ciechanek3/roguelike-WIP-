@@ -24,12 +24,49 @@ namespace Floor.Rooms
             _roomPool = new ObjectPool<Room>(availableRooms, poolingMultiplier);
         }
 
+        private Room GetRandomRoomFromList(DoorType doorType, List<Room> possibleRooms)
+        {
+            Room randomRoom = _roomPool.TakeElementFromPool(() => possibleRooms.Where(r => r.CheckIfDoorExist(doorType)).ToList());
+            return randomRoom;
+        }
+
+        public Room GetProperRoomRandomly(List<Coordinates> coordinatesList, int coordinatesIndex)
+        {
+            int x = coordinatesList[coordinatesIndex].X;
+            int y = coordinatesList[coordinatesIndex].Y;
+
+            List<DoorType> doorTypes = new List<DoorType>();
+            
+            for (int i = 0; i < coordinatesList.Count; i++)
+            {
+                if (coordinatesList[i].X != x  && coordinatesList[i].Y != y)
+                {
+                    continue;
+                }
+                if (coordinatesList[i].X - x == 1)
+                {
+                    doorTypes.Add(DoorType.Right);
+                }
+                else if (coordinatesList[i].X - x == -1)
+                {
+                    doorTypes.Add(DoorType.Left);
+                }
+                else if (coordinatesList[i].Y - y == 1)
+                {
+                    doorTypes.Add(DoorType.Top);
+                }
+                else if (coordinatesList[i].Y - y == -1)
+                {
+                    doorTypes.Add(DoorType.Down);
+                }
+            }
+            
+            Room room = GetRandomRoomWithMatchingDoors(doorTypes);
+            return room;
+        }
+        
         private Room GetRandomRoomWithMatchingDoors(List<DoorType> doorTypes)
         {
-            if (_roomPool.ObjectsInPool.Count == 0)
-            {
-                _roomPool.MakePool(1);
-            }
             List<Room> possibleRooms = _roomPool.ObjectsInPool;
             Room room = GetRandomRoomFromList(doorTypes[0], possibleRooms);
 
@@ -43,57 +80,6 @@ namespace Floor.Rooms
                     i = doorTypes.Count;
                 }
             }
-
-            return room;
-        }
-
-        private Room GetRandomRoomFromList(DoorType doorType, List<Room> possibleRooms)
-        {
-            List<Room> rooms = possibleRooms.Where(r => r.CheckIfDoorExist(doorType)).ToList();
-            Room randomRoom = rooms[Random.Range(0, rooms.Count)];
-            _roomPool.TakeElementFromPool(randomRoom);
-            return randomRoom;
-        }
-        
-        private List<DoorType> CompareNeighborRoomCoordinates(Coordinates nei, Coordinates cur, List<DoorType> dTypes)
-        {
-            if (nei.X > cur.X)
-            {
-                dTypes.Add(DoorType.Right);
-            }
-            else if (nei.X < cur.X)
-            {
-                dTypes.Add(DoorType.Left);
-            }
-
-            if (nei.Y > cur.Y)
-            {
-                dTypes.Add(DoorType.Top);
-            }
-            else if (nei.Y < cur.Y)
-            {
-                dTypes.Add(DoorType.Down);
-            }
-
-            dTypes = dTypes.Distinct().ToList();
-            return dTypes;
-        }
-        
-        public Room GetProperRoomRandomly(Coordinates prevRoom, Coordinates currRoom, [CanBeNull] Coordinates nextRoom)
-        {
-            List<DoorType> doorTypes = new List<DoorType>();
-
-            if (prevRoom != null)
-            {
-                doorTypes = CompareNeighborRoomCoordinates(prevRoom, currRoom, doorTypes);
-            }
-            
-            if (nextRoom != null)
-            {
-                doorTypes = CompareNeighborRoomCoordinates(nextRoom, currRoom, doorTypes);
-            }
-
-            Room room = GetRandomRoomWithMatchingDoors(doorTypes);
 
             return room;
         }

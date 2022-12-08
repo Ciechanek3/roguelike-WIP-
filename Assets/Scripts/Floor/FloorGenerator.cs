@@ -31,15 +31,13 @@ namespace Floor
         private void CreateFloor()
         {
             CreateFloorCoordinates();
+
             Room startingRoom = Instantiate(roomPicker.StartingRoom);
             Room room;
 
             for (int i = 1; i < _takenCoordinates.Count; i++)
             {
-                room = roomPicker.GetProperRoomRandomly(
-                    _takenCoordinates[i - 1], 
-                    _takenCoordinates[i], 
-                    i + 1 < _takenCoordinates.Count ? _takenCoordinates[i + 1] : null);
+                room = roomPicker.GetProperRoomRandomly(_takenCoordinates, i);
                 room.PlaceOnScene(_takenCoordinates, i);
             }
             

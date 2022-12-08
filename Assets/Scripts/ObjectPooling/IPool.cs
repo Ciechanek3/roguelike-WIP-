@@ -1,9 +1,9 @@
-using Floor;
+using UnityEngine;
 
 namespace ObjectPooling
 {
     public interface IPool
     {
-        public void Setup();
+        public void Setup(Vector3 transform);
     }
 }

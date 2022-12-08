@@ -11,9 +11,11 @@ namespace Floor.Rooms
     {
         [SerializeField] private List<Door> doors;
 
+        private Coordinates _coordinates;
+        
         public int index, x, y;
         
-        public void Setup()
+        public void Setup(Vector3 position)
         {
             gameObject.SetActive(true);
         }
@@ -25,6 +27,7 @@ namespace Floor.Rooms
                 0, 
                 coordinatesList[coordinatesIndex].Y * GameSettings.Instance.YRoomSize);
             
+            _coordinates = new Coordinates(coordinatesList[coordinatesIndex].X, coordinatesList[coordinatesIndex].Y);
             SetupDoors(coordinatesList, coordinatesIndex);
             
             index = coordinatesIndex;
@@ -34,39 +37,37 @@ namespace Floor.Rooms
 
         private void SetupDoors(List<Coordinates> coordinatesList, int coordinatesIndex)
         {
-            int x = coordinatesList[coordinatesIndex].X;
-            int y = coordinatesList[coordinatesIndex].Y;
             for (int i = 0; i < coordinatesList.Count; i++)
             {
-                if (coordinatesList[i].X != x && coordinatesList[i].Y != y)
+                if (coordinatesList[i].X != _coordinates.X  && coordinatesList[i].Y != _coordinates.Y)
                 {
                     continue;
                 }
-                if (coordinatesList[i].X - x == 1)
+                if (coordinatesList[i].X - _coordinates.X == 1)
                 {
-                    SetupDoor(DoorType.Right);
+                    OpenDoors(DoorType.Right);
                 }
-                else if (coordinatesList[i].X - x == -1)
+                else if (coordinatesList[i].X - _coordinates.X == -1)
                 {
-                    SetupDoor(DoorType.Left);
+                    OpenDoors(DoorType.Left);
                 }
-                else if (coordinatesList[i].Y - y == 1)
+                else if (coordinatesList[i].Y - _coordinates.Y == 1)
                 {
-                    SetupDoor(DoorType.Top);
+                    OpenDoors(DoorType.Top);
                 }
-                else if (coordinatesList[i].Y - y == -1)
+                else if (coordinatesList[i].Y - _coordinates.Y == -1)
                 {
-                    SetupDoor(DoorType.Down);
+                    OpenDoors(DoorType.Down);
                 }
             }
         }
         
-        private void SetupDoor(DoorType doorType)
+        private void OpenDoors(DoorType doorType)
         {
             Door door = doors.FirstOrDefault(d => d.DoorType == doorType);
             if (door != null)
             {
-                door.Disable();
+                door.Open();
             }
         }
 
