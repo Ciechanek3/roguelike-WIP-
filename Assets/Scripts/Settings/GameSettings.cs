@@ -1,12 +1,16 @@
+using System;
 using UnityEngine;
 
 namespace Settings
 {
     public class GameSettings : MonoBehaviour
     {
+        [Header ("Room size:")]
         [SerializeField] private int xRoomSize;
         [SerializeField] private int yRoomSize;
 
+        [SerializeField] private GameObject playerPrefab;
+        
         public int XRoomSize => xRoomSize;
         public int YRoomSize => yRoomSize;
         public static GameSettings Instance { get; private set; }
@@ -21,6 +25,11 @@ namespace Settings
             { 
                 Instance = this; 
             }
+        }
+
+        private void Start()
+        {
+            playerPrefab.transform.position = new Vector3(xRoomSize / 2, 10, -yRoomSize / 2);
         }
     }
 }
