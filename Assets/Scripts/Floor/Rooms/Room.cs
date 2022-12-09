@@ -12,9 +12,7 @@ namespace Floor.Rooms
         [SerializeField] private List<Door> doors;
 
         private Coordinates _coordinates;
-        
-        public int index, x, y;
-        
+
         public void Setup(Vector3 position)
         {
             gameObject.SetActive(true);
@@ -29,10 +27,6 @@ namespace Floor.Rooms
             
             _coordinates = new Coordinates(coordinatesList[coordinatesIndex].X, coordinatesList[coordinatesIndex].Y);
             SetupDoors(coordinatesList, coordinatesIndex);
-            
-            index = coordinatesIndex;
-            x = coordinatesList[coordinatesIndex].X;
-            y = coordinatesList[coordinatesIndex].Y;
         }
 
         private void SetupDoors(List<Coordinates> coordinatesList, int coordinatesIndex)
