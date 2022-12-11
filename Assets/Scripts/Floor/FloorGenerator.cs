@@ -17,7 +17,6 @@ namespace Floor
 
         private int _currentX;
         private int _currentY;
-        private readonly List<Coordinates> _takenCoordinates = new List<Coordinates>();
 
         #endregion
         #region SetupData
@@ -30,25 +29,30 @@ namespace Floor
 
         private void CreateFloor()
         {
-            CreateFloorCoordinates();
+            List<Coordinates> _takenCoordinates = CreateFloorCoordinates();
+            SetupRoomsBasedOnCoordinates(_takenCoordinates);
+        }
 
+        private void SetupRoomsBasedOnCoordinates(List<Coordinates> coordinatesList)
+        {
             Room startingRoom = Instantiate(roomPicker.StartingRoom);
             Room room;
 
-            for (int i = 1; i < _takenCoordinates.Count; i++)
+            for (int i = 1; i < coordinatesList.Count; i++)
             {
-                room = roomPicker.GetProperRoomRandomly(_takenCoordinates, i);
-                room.PlaceOnScene(_takenCoordinates, i);
+                room = roomPicker.GetProperRoomRandomly(coordinatesList, i);
+                room.PlaceOnScene(coordinatesList, i);
             }
             
-            startingRoom.PlaceOnScene(_takenCoordinates, 0);
+            startingRoom.PlaceOnScene(coordinatesList, 0);
         }
 
-        private void CreateFloorCoordinates()
+        private List<Coordinates> CreateFloorCoordinates()
         {
+            List<Coordinates> coordinatesList = new List<Coordinates>();
             _currentX = 0;
             _currentY = 0;
-            _takenCoordinates.Add(new Coordinates(_currentX, _currentX));
+            coordinatesList.Add(new Coordinates(_currentX, _currentX));
             
             for (int i = 1; i < numberOfRooms; i++)
             {
@@ -77,13 +81,15 @@ namespace Floor
 
                 Coordinates coordinates = new Coordinates(_currentX, _currentY);
 
-                if (_takenCoordinates.Any(c => c.X == _currentX && c.Y == _currentY))
+                if (coordinatesList.Any(c => c.X == _currentX && c.Y == _currentY))
                 {
                     i--;
                     continue;
                 }
-                _takenCoordinates.Add(coordinates);
+                coordinatesList.Add(coordinates);
             }
+
+            return coordinatesList;
         }
 
     }
