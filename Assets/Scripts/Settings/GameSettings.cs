@@ -29,7 +29,7 @@ namespace Settings
 
         private void Start()
         {
-            playerPrefab.transform.position = new Vector3(xRoomSize / 2, 0, -yRoomSize / 2);
+            playerPrefab.transform.position = new Vector3(xRoomSize / 2, 1, -yRoomSize / 2);
         }
     }
 }
