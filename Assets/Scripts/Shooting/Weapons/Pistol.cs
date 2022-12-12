@@ -2,8 +2,9 @@ namespace Shooting.Weapons
 {
     public class Pistol : WeaponBase
     {
-        protected override void Reload()
+        public override void OnReloadFinished()
         {
+            base.OnReloadFinished();
             CurrentAmmoInMagazine = ammoInMagazine;
         }
     }

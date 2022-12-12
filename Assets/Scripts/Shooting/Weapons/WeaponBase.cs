@@ -1,4 +1,3 @@
-using DG.Tweening;
 using Events;
 using ObjectPooling;
 using Settings;
@@ -21,9 +20,11 @@ namespace Shooting.Weapons
 
         protected int CurrentAmmoInMagazine;
         protected ObjectPool<Bullet.Bullet> BulletsPool;
+        protected Animator animator;
 
         private void Start()
         {
+            animator = GetComponent<Animator>();
             BulletsPool = new ObjectPool<Bullet.Bullet>(bulletPrefab, ammoInMagazine);
             CurrentAmmoInMagazine = ammoInMagazine;
         }
@@ -31,15 +32,21 @@ namespace Shooting.Weapons
         private void OnEnable()
         {
             EventManager.ShootInputEvent += Shoot;
+            EventManager.ReloadInputEvent += Reload;
         }
 
         private void OnDisable()
         {
             EventManager.ShootInputEvent -= Shoot;
+            EventManager.ReloadInputEvent -= Reload;
         }
 
         protected void Shoot()
         {
+            if (animator.GetBool("Reloading"))
+            {
+                return;
+            }
             RaycastHit rHit;
             Transform cameraTransform = GameSettings.Instance.MainCamera.transform;
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out rHit));
@@ -60,6 +67,14 @@ namespace Shooting.Weapons
             }
         }
 
-        protected abstract void Reload();
+        protected void Reload()
+        {
+            animator.SetBool("Reloading", true);
+        }
+
+        public virtual void OnReloadFinished()
+        {
+            animator.SetBool("Reloading", false);
+        }
     }
 }
