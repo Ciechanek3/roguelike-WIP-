@@ -20,6 +20,14 @@ namespace ObjectPooling
             MakePool(poolMultiplier);
         }
 
+        public ObjectPool(T objectInPool, int poolMultiplier)
+        {
+            ObjectsInPool = new List<T>();
+            _initialItems = new List<T>();
+            _initialItems.Add(objectInPool);
+            MakePool(poolMultiplier);
+        }
+
         public void MakePool(int poolMultiplier)
         {
             for (int i = 0; i < poolMultiplier; i++)
@@ -33,7 +41,7 @@ namespace ObjectPooling
             }
         }
 
-        public T TakeElementFromPool([CanBeNull] Func<List<T>> filter)
+        public T TakeElementFromPool([CanBeNull] Func<List<T>> filter = null)
         {
             T element;
             if (filter != null)
@@ -50,8 +58,16 @@ namespace ObjectPooling
                 }
             }
             else
-            {
-                element = ObjectsInPool[Random.Range(0, ObjectsInPool.Count)];
+            { 
+                if (ObjectsInPool.Count == 0)
+                {
+                    MakePool(1);
+                    element = TakeElementFromPool();
+                }
+                else
+                {
+                    element = ObjectsInPool[Random.Range(0, ObjectsInPool.Count)];  
+                }
             }
             
             if (ObjectsInPool.Contains(element))
