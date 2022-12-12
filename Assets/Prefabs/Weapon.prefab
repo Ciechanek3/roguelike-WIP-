@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8061237695106500282}
   - component: {fileID: 3426137487894768106}
   - component: {fileID: 1228245121346703420}
+  - component: {fileID: 4674217527050931060}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -428,6 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ee5624b62532347af99e43acf53f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animation: {fileID: 0}
   bulletPrefab: {fileID: 7564617697603017188, guid: e277cd8abe49d8f4d8bf303d61ad5298, type: 3}
   barrel: {fileID: 844170343698014087}
   ammoInMagazine: 10
@@ -435,6 +437,25 @@ MonoBehaviour:
   reloadTime: 5
   bulletSpeed: 5
   damage: 5
+--- !u!95 &4674217527050931060
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653273793209801037}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f8f139baa1247e4da0445590b1e6116, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1797090373341176734
 GameObject:
   m_ObjectHideFlags: 0
