@@ -1,3 +1,4 @@
+using Events;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -5,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
-	public class StarterAssetsInputs : MonoBehaviour
+	public class PlayerMovement : MonoBehaviour
 	{
 		[Header("Character Input Values")]
 		public Vector2 move;
@@ -42,6 +43,16 @@ namespace StarterAssets
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
+		}
+
+		public void OnReload(InputValue value)
+		{
+			EventManager.OnReloadInputEvent();
+		}
+
+		public void OnShoot(InputValue value)
+		{
+			EventManager.OnShootInputEvent();
 		}
 #endif
 
