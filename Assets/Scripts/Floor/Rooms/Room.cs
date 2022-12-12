@@ -13,11 +13,6 @@ namespace Floor.Rooms
 
         private Coordinates _coordinates;
 
-        public void Setup(Vector3 position)
-        {
-            gameObject.SetActive(true);
-        }
-        
         public void PlaceOnScene(List<Coordinates> coordinatesList, int coordinatesIndex)
         {
             gameObject.transform.position = new Vector3(
@@ -26,10 +21,10 @@ namespace Floor.Rooms
                 coordinatesList[coordinatesIndex].Y * GameSettings.Instance.YRoomSize);
             
             _coordinates = new Coordinates(coordinatesList[coordinatesIndex].X, coordinatesList[coordinatesIndex].Y);
-            SetupDoors(coordinatesList, coordinatesIndex);
+            SetupDoors(coordinatesList);
         }
 
-        private void SetupDoors(List<Coordinates> coordinatesList, int coordinatesIndex)
+        private void SetupDoors(List<Coordinates> coordinatesList)
         {
             for (int i = 0; i < coordinatesList.Count; i++)
             {
