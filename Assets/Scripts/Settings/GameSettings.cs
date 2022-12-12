@@ -10,6 +10,9 @@ namespace Settings
         [SerializeField] private int yRoomSize;
 
         [SerializeField] private GameObject playerPrefab;
+        [SerializeField] private Camera mainCamera;
+
+        public Camera MainCamera => mainCamera;
         
         public int XRoomSize => xRoomSize;
         public int YRoomSize => yRoomSize;
