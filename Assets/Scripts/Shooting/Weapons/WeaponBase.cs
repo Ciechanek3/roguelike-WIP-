@@ -1,3 +1,4 @@
+using System;
 using Events;
 using ObjectPooling;
 using Settings;
@@ -12,41 +13,47 @@ namespace Shooting.Weapons
         [SerializeField] protected Transform barrel;
         [Header("Weapon stats")]
         [SerializeField] protected int ammoInMagazine;
-        [SerializeField] protected int attacksPerSecond;
-        [SerializeField] protected int reloadTime;
-        [SerializeField] protected int bulletSpeed;
-        [SerializeField] protected int damage;
+        [SerializeField] protected float shootCooldown;
+        [SerializeField] protected float bulletSpeedMultiplier;
+        [SerializeField] protected float damage;
         
 
         protected int CurrentAmmoInMagazine;
-        protected ObjectPool<Bullet.Bullet> BulletsPool;
-        protected Animator animator;
+        private ObjectPool<Bullet.Bullet> _bulletsPool;
+        private Animator animator;
+        private float lastAttackedTimer = -1;
 
         private void Start()
         {
             animator = GetComponent<Animator>();
-            BulletsPool = new ObjectPool<Bullet.Bullet>(bulletPrefab, ammoInMagazine);
+            _bulletsPool = new ObjectPool<Bullet.Bullet>(bulletPrefab, ammoInMagazine);
             CurrentAmmoInMagazine = ammoInMagazine;
+            EventManager.UpdateAmmo(CurrentAmmoInMagazine, ammoInMagazine);
         }
 
         private void OnEnable()
         {
-            EventManager.ShootInputEvent += Shoot;
-            EventManager.ReloadInputEvent += Reload;
+            EventManager.OnShootInputEvent += OnShoot;
+            EventManager.OnReloadInputEvent += Reload;
         }
 
         private void OnDisable()
         {
-            EventManager.ShootInputEvent -= Shoot;
-            EventManager.ReloadInputEvent -= Reload;
+            EventManager.OnShootInputEvent -= OnShoot;
+            EventManager.OnReloadInputEvent -= Reload;
         }
 
-        protected void Shoot()
+        protected void OnShoot()
         {
+            if (Time.time <= lastAttackedTimer + shootCooldown)
+            {
+                return;
+            }
             if (animator.GetBool("Reloading"))
             {
                 return;
             }
+            
             RaycastHit rHit;
             Transform cameraTransform = GameSettings.Instance.MainCamera.transform;
             if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out rHit));
@@ -55,15 +62,18 @@ namespace Shooting.Weapons
                 {
                     return;
                 }
-                
                 CurrentAmmoInMagazine--;
-                Bullet.Bullet currentBullet = BulletsPool.TakeElementFromPool();
+                
+                Bullet.Bullet currentBullet = _bulletsPool.TakeElementFromPool();
                 currentBullet.transform.position = barrel.transform.position;
-                currentBullet.MoveTo(rHit.point);
+                currentBullet.Setup(rHit.point, bulletSpeedMultiplier, damage);
+                EventManager.UpdateAmmo(CurrentAmmoInMagazine, ammoInMagazine);
+                lastAttackedTimer = Time.time;
                 currentBullet.Collided += () =>
                 {
-                    BulletsPool.GetElementToPool(currentBullet);
+                    _bulletsPool.GetElementToPool(currentBullet);
                 };
+                animator.Play("Shoot");
             }
         }
 

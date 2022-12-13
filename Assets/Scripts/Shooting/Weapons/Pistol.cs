@@ -1,3 +1,5 @@
+using Events;
+
 namespace Shooting.Weapons
 {
     public class Pistol : WeaponBase
@@ -6,6 +8,7 @@ namespace Shooting.Weapons
         {
             base.OnReloadFinished();
             CurrentAmmoInMagazine = ammoInMagazine;
+            EventManager.UpdateAmmo(CurrentAmmoInMagazine, ammoInMagazine);
         }
     }
 }
