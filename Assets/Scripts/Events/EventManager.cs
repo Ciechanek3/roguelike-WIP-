@@ -5,18 +5,23 @@ namespace Events
 {
     public class EventManager : MonoBehaviour
     {
-        public static event Action ReloadInputEvent;
-        public static event Action ShootInputEvent;
+        public static event Action OnReloadInputEvent;
+        public static event Action OnShootInputEvent;
+        public static event Action<int,int> OnShootEvent;
 
-        public static void OnReloadInputEvent()
+        public static void ReloadInputEvent()
         {
-            ReloadInputEvent?.Invoke();
+            OnReloadInputEvent?.Invoke();
         }
     
-        public static void OnShootInputEvent()
+        public static void ShootInputEvent()
         {
-            Debug.Log("xd");
-            ShootInputEvent?.Invoke();
+            OnShootInputEvent?.Invoke();
+        }
+
+        public static void UpdateAmmo(int cur, int max)
+        {
+            OnShootEvent?.Invoke(cur, max);
         }
     }
 }
