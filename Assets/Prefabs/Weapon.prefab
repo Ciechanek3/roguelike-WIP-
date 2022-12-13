@@ -412,7 +412,7 @@ MeshCollider:
   m_GameObject: {fileID: 1653273793209801037}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -429,13 +429,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ee5624b62532347af99e43acf53f21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animation: {fileID: 0}
   bulletPrefab: {fileID: 7564617697603017188, guid: e277cd8abe49d8f4d8bf303d61ad5298, type: 3}
   barrel: {fileID: 844170343698014087}
   ammoInMagazine: 10
-  attacksPerSecond: 5
-  reloadTime: 5
-  bulletSpeed: 5
+  shootCooldown: 0
+  bulletSpeedMultiplier: 0
   damage: 5
 --- !u!95 &4674217527050931060
 Animator:
@@ -1204,7 +1202,7 @@ MeshCollider:
   m_GameObject: {fileID: 1797090373341176734}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -1501,7 +1499,7 @@ MeshCollider:
   m_GameObject: {fileID: 2941147351127330024}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -1950,7 +1948,7 @@ MeshCollider:
   m_GameObject: {fileID: 4707502283949786460}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
