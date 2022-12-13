@@ -71,6 +71,7 @@ namespace Shooting.Weapons
                 lastAttackedTimer = Time.time;
                 currentBullet.Collided += () =>
                 {
+                    currentBullet.ResetBullet();
                     _bulletsPool.GetElementToPool(currentBullet);
                 };
                 animator.Play("Shoot");
