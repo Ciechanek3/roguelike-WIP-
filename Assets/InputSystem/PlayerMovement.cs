@@ -47,12 +47,12 @@ namespace StarterAssets
 
 		public void OnReload(InputValue value)
 		{
-			EventManager.OnReloadInputEvent();
+			EventManager.ReloadInputEvent();
 		}
 
 		public void OnShoot(InputValue value)
 		{
-			EventManager.OnShootInputEvent();
+			EventManager.ShootInputEvent();
 		}
 #endif
 
