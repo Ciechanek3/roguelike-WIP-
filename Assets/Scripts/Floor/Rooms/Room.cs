@@ -3,13 +3,14 @@ using System.Linq;
 using ObjectPooling;
 using Settings;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.AI;
 
 namespace Floor.Rooms
 {
     public class Room : MonoBehaviour, IPool
     {
         [SerializeField] private List<Door> doors;
+        [SerializeField] private NavMeshSurface surface;
 
         private Coordinates _coordinates;
 
@@ -22,6 +23,7 @@ namespace Floor.Rooms
             
             _coordinates = new Coordinates(coordinatesList[coordinatesIndex].X, coordinatesList[coordinatesIndex].Y);
             SetupDoors(coordinatesList);
+            BuildNavMesh();
         }
 
         private void SetupDoors(List<Coordinates> coordinatesList)
@@ -60,6 +62,11 @@ namespace Floor.Rooms
             }
         }
 
+        private void BuildNavMesh()
+        {
+            surface.BuildNavMesh();
+        }
+        
         public bool CheckIfDoorExist(DoorType doorType)
         {
             return doors.Any(t => t.DoorType == doorType);

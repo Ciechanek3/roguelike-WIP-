@@ -51,9 +51,7 @@ MonoBehaviour:
   - {fileID: 8845542811439419218}
   - {fileID: 7550772858583190626}
   - {fileID: 2770050730017926707}
-  index: 0
-  x: 0
-  y: 0
+  surface: {fileID: 1100462628269613584}
 --- !u!1 &728060235531645952
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,12 +99,13 @@ GameObject:
   - component: {fileID: 2507903289616843198}
   - component: {fileID: 3871652166343965819}
   - component: {fileID: 2894231225647252477}
+  - component: {fileID: 1100462628269613584}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967263
   m_IsActive: 1
 --- !u!4 &8164998078916751169
 Transform:
@@ -401,6 +400,35 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &1100462628269613584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724332142917020688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &4738942805370867347
 GameObject:
   m_ObjectHideFlags: 0
