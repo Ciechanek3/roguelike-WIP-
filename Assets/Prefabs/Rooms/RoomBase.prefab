@@ -356,7 +356,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c22777d6e868e4f2fb421913386b154e, type: 2}
+  - {fileID: 2100000, guid: 4552885680ee5c84ebaf727647124f37, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -474,6 +474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LWall
       objectReference: {fileID: 0}
+    - target: {fileID: 5269840562409902334, guid: c3897c3adae71694281a022c558e5dd8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e2a1805c8a2b2748a858f6881c4f340, type: 2}
     - target: {fileID: 5618303210476065040, guid: c3897c3adae71694281a022c558e5dd8, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1752,6 +1756,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RWall
       objectReference: {fileID: 0}
+    - target: {fileID: 5269840562409902334, guid: c3897c3adae71694281a022c558e5dd8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e2a1805c8a2b2748a858f6881c4f340, type: 2}
     - target: {fileID: 5618303210476065040, guid: c3897c3adae71694281a022c558e5dd8, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3163,6 +3171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DWall
       objectReference: {fileID: 0}
+    - target: {fileID: 5269840562409902334, guid: c3897c3adae71694281a022c558e5dd8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e2a1805c8a2b2748a858f6881c4f340, type: 2}
     - target: {fileID: 5618303210476065040, guid: c3897c3adae71694281a022c558e5dd8, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4574,6 +4586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TWall
       objectReference: {fileID: 0}
+    - target: {fileID: 5269840562409902334, guid: c3897c3adae71694281a022c558e5dd8, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3e2a1805c8a2b2748a858f6881c4f340, type: 2}
     - target: {fileID: 5618303210476065040, guid: c3897c3adae71694281a022c558e5dd8, type: 3}
       propertyPath: m_RootOrder
       value: 0

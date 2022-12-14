@@ -13,6 +13,8 @@ namespace Settings
         [SerializeField] private Camera mainCamera;
 
         public Camera MainCamera => mainCamera;
+
+        public Transform PlayerPosition => playerPrefab.transform;
         
         public int XRoomSize => xRoomSize;
         public int YRoomSize => yRoomSize;
